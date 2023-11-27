@@ -1,4 +1,39 @@
-for i in rang(10):
-  print('Hello, World!)
+from random import randint
+secret_number = randint(1,50)
 
-  
+attempt_count = 5
+
+print(f''' Welcome to the Guessing Game
+
+You have {attempt_count}' attempts remaining
+
+Good luck!
+''')
+print()
+
+while attempt_count > 0:  # as long as the attempt_count is >0, the user can input numbers
+    try:  # new block of code
+        guess_number = int(input("Enter a number between 1 and 50 and I'll guess it: ")) #input will be typecased as 'integer'
+
+        if guess_number == secret_number: #comapres the random number and user number
+            print(f'''\nCongratulations! Your guess was correct. It's {secret_number}
+
+            You are very good at this game :)
+                  ''')  #if the number is correct
+            break
+        elif guess_number > secret_number:  # checking condition 1 if the input is incorrect and too high
+            attempt_count = attempt_count - 1 #reduce the attempts as the user has tried once
+            if attempt_count > 0: #check if user still has tries
+                print(f"Oh no! Your guess was too high. Try again. You have {attempt_count} attempts left")
+            else:
+                print(f"The Game is over. The Secret Number was {secret_number}")
+        else: #this loop will be executed if the user input is less than the secret number
+            attempt_count = attempt_count - 1 #reduces the attempt count
+            if attempt_count > 0: #checks if the user still has tries
+                print(f"Yikes!! Your guess was too low. Try again. You have {attempt_count} attempts left")
+            else:
+                print(f"The Game is over. The Secret Number was {secret_number}")
+                break #breaks out of the loop to the end of code
+    except ValueError:  # this block will run if a user enters an invalid number
+        print("Input is not valid. Enter a valid number again")
+        continue #ends itteration
